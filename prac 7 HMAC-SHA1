@@ -1,0 +1,27 @@
+import java.security.SecureRandom;
+import java.security.KeyStore.SecretKeyEntry;
+import java.util.Scanner;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+
+public class SHAi {
+    public static void main(String[] args) throws Exception {
+         Scanner sc = new Scanner(System.in);
+         System.out.println("Enter data: ");
+         String data = sc.nextLine();
+
+         SecureRandom rnd=new SecureRandom();
+         byte[] k = new byte[100];
+         rnd.nextBytes(k);
+
+         SecretKeySpec key = new SecretKeySpec(k,"HMACSHA1");
+         System.out.println("key: "+key.getEncoded());
+
+         Mac m = Mac.getInstance("HmacSHA1");
+         m.init(key);
+         m.update(data.getBytes());
+         byte[] result = m.doFinal();
+         System.out.println("Signature using HMACSHA1: "+new String(result));
+    }
+}
