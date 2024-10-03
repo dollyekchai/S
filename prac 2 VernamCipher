@@ -1,0 +1,33 @@
+VernamCipher
+
+import java.util.Scanner;
+public class VernamCipher
+{
+	public static void main(String[] args)
+	{
+		String output="",dec="";
+		char t,k;
+		int x;
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter Plaintext: ");
+		String text=sc.nextLine().toLowerCase();	
+		System.out.println("Enter One Time PASSWORD of length: "+text.length());
+		String key=sc.nextLine().toLowerCase();
+		for(int i=0;i<text.length();i++)
+		{
+			t=text.charAt(i);
+			k=key.charAt(i);
+			x=t^k;
+			output+=(char)(x+96); //small 97 to 122
+		}
+		System.out.println("Encrypted Text is: "+output);
+		for(int i=0;i<output.length();i++)
+		{
+			t=output.charAt(i);
+			k=key.charAt(i);
+			x=t^k;
+			dec+=(char)(x+96);
+		}
+		System.out.println("Decrypted Text is: "+dec);
+	}
+}
